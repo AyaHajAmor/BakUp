@@ -12,7 +12,7 @@
         <div class="container">
             <a href="#">Home</a>
             <i class="fa fa-chevron-right breadcrumb-separator"></i>
-            <span>Shopping Cart</span>
+            <span>Shoppingg Cart</span>
         </div>
     </div> <!-- end breadcrumbs -->
 
