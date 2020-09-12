@@ -1,13 +1,17 @@
 <?php
 
 namespace App;
+use App\money_format;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    public function presentPrice()
+   
+
+    public function scopeMightAlsoLike($query)
     {
-        return money_format('$%i', $this->price / 100);
+        return $query->inRandomOrder()->take(4);
     }
+   
 }

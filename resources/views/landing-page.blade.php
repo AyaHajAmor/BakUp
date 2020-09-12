@@ -21,10 +21,10 @@
             <div class="top-nav container">
                 <div class="logo">Laravel Ecommerce</div>
                 <ul>
-                    <li><a href="#">Shop</a></li>
+                    <li><a href="{{ route('shop.index') }}">Shop</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Blog</a></li>
-                    <li><a href="#">Cart <span class="cart-count"><span>3</span></span></a></li>
+                    <li><a href="{{ route('cart.index') }}">Cart <span class="cart-count"><span>3</span></span></a></li>
                 </ul>
             </div> <!-- end top-nav -->
             <div class="hero container">
@@ -69,7 +69,7 @@
                         <div class="product">
                             <a href="{{ route('shop.show', $product->slug) }}"><img src="{{ asset('img/products/'.$product->slug.'.jpg') }}" alt="product"></a>
                             <a href="{{ route('shop.show', $product->slug) }}"><div class="product-name">{{ $product->name }}</div></a>
-                            <div class="product-price">{{ $product->presentPrice() }}</div>
+                            <div class="product-price">.....</div>
                         </div>
                     @endforeach
 
