@@ -31,7 +31,7 @@
 
             <h3>By Price</h3>
             <ul>
-                <li><a href="#">$0 - $700</a></li>
+                <li><a href="#">$0 - $7000</a></li>
                 <li><a href="#">$700 - $2500</a></li>
                 <li><a href="#">$2500+</a></li>
             </ul>
