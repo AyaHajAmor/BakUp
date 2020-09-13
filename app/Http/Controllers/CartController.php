@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product ;
+use Gloudemans\Shoppingcart\Facades\Cart;
 class CartController extends Controller
 {
     /**
@@ -52,6 +53,10 @@ class CartController extends Controller
           ->associate('App\Product');
          return  redirect()->route('cart.index')->with('success_message', 'Item was added to your cart!') ;
     
+    }
+    public function empty()
+    {
+        Cart::destroy();
     }
 
     /**

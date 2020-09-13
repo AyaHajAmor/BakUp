@@ -18,35 +18,55 @@
 
     <div class="cart-section container">
         <div>
-            <h2>3 items in Shopping Cart</h2>
+            @if (session()->has('success_message'))
+                <div class="alert alert-success">
+                    {{ session()->get('success_message') }}
+                </div>
+            @endif
+
+            @if(count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if (Cart::count() > 0)
+            <h2>{{ Cart::count() }} item(s) in Shopping Cart</h2>
 
             <div class="cart-table">
+                @foreach (Cart::instance('saveForLater')->content() as $item)
                 <div class="cart-table-row">
                     <div class="cart-table-row-left">
-                        <a href="#"><img src="/img/macbook-pro.png" alt="item" class="cart-table-img"></a>
+                        <a href="{{ route('shop.show', $item->model->slug) }}"><img src="{{ asset('img/products/'.$item->model->slug.'.jpg') }}" alt="item" class="cart-table-img"></a>
                         <div class="cart-item-details">
-                            <div class="cart-table-item"><a href="#">MacBook Pro</a></div>
-                            <div class="cart-table-description">15 inch, 1TB SSD, 32GB RAM</div>
+                            <div class="cart-table-item"><a href="{{ route('shop.show', $item->model->slug) }}">{{ $item->model->name }}</a></div>
+                            <div class="cart-table-description">{{ $item->model->details }}</div>
                         </div>
                     </div>
                     <div class="cart-table-row-right">
                         <div class="cart-table-actions">
-                            <a href="#">Remove</a> <br>
-                            <a href="#">Save for Later</a>
+                            <form action="{{ route('saveForLater.destroy', $item->rowId) }}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+
+                                <button type="submit" class="cart-options">Remove</button>
+                            </form>
+
+                            <form action="{{ route('saveForLater.switchToCart', $item->rowId) }}" method="POST">
+                                {{ csrf_field() }}
+
+                                <button type="submit" class="cart-options">Move to Cart</button>
+                            </form>
                         </div>
-                        <div>
-                            <select class="quantity">
-                                <option selected="">1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
-                        <div>$2499.99</div>
+
+                        <div>{{ $item->model->presentPrice() }}</div>
                     </div>
                 </div> <!-- end cart-table-row -->
-
+                @endforeach
                 <div class="cart-table-row">
                     <div class="cart-table-row-left">
                         <a href="#"><img src="/img/macbook-pro.png" alt="item" class="cart-table-img"></a>
@@ -133,6 +153,10 @@
                 <a href="#" class="button">Continue Shopping</a>
                 <a href="#" class="button-primary">Proceed to Checkout</a>
             </div>
+
+            @else
+                <h3>You have no items Saved for Later.</h3>
+            @endif
 
             <h2>2 items Saved For Later</h2>
 
