@@ -25,7 +25,7 @@
         <div class="product-section-information">
             <h1 class="product-section-title">{{ $product->name }}</h1>
             <div class="product-section-subtitle">{{ $product->details }}</div>
-            <div class="product-section-price">.....</div>
+            <div class="product-section-price">{{ $product->price }}</div>
             
 
             <p>
